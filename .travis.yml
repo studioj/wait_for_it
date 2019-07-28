@@ -1,0 +1,32 @@
+dist: xenial
+language: python
+sudo: false
+cache:
+  directories:
+    - $HOME/.cache/pip
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8-dev"
+  - "pypy"
+  - "pypy3"
+
+install:
+  # Ensure modern pip/etc to avoid some issues w/ older worker environs
+  - pip install pytest
+  - pip install coverage
+  - pip install pytest-cov
+  - pip install codecov # For codecov specifically
+  - pip install -e .
+
+script:
+  - pytest --cov=wait_for_it tests/
+
+env:
+  - CODECOV_TOKEN="919258c7-ed4b-463f-973a-68fc7a081d2d"
+
+after_success:
+  - codecov
