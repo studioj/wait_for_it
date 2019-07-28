@@ -1,9 +1,9 @@
 from setuptools import setup
 
-_locals = {}
-with open("wait_for_it/_version.py") as fp:
-    exec(fp.read(), None, _locals)
-version = _locals["__version__"]
+from wait_for_it import __version__
+
+version = __version__
+
 
 longdesc = """
 This is a library for letting you python code wait for a certain action top complete"""
