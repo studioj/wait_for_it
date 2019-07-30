@@ -19,6 +19,7 @@ install:
   - pip install pytest
   - pip install coverage
   - pip install pytest-cov
+  - pip install mock
   - pip install codecov # For codecov specifically
   - pip install -e .
 
