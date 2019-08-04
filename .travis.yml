@@ -29,3 +29,11 @@ env:
 
 after_success:
   - codecov
+
+deploy:
+  provider: pypi
+  user: studioj
+  password:
+    secure: CGFNUJ0nNxfqHeXDCwanQvlEasgulWrE3yRhjXr1SiTF48XkgXHGk/YGQXcwIW2odS0W71f+6dwrQKpV/dwLUhVw1RXmN51yzX7uWYelqypYVGpARzgSaEONP/cD7g7IPuIxzRmpOzffK3Hmd62bV38MgTmIaK9J9z8XF/kOkUYskSWwpbEMboszRpDNUKapH/TdJ2oFPxCHfY7wlk31daTA1q5p0OFcBzrM6Lz3P+e+smPeb0Z4mZwKVIM6Q/jctHGMycmf0mi2os0CpitylJz2nmbDlx/IuXenLbyOGKcuLBn7DLGInkm4gssDP2NWTjrzfh3wwAqqAfS58I+8XGs75RnnFbJVFlwaGqLC+iNqHAIFyqw74EaT51TUdauYp4n+j5zKZruvLa/+zjLe4L8mbI+5nBs6ejF9K7lR4uARMRQlPRuW7BmgJM9U77QK8YwAOqQyXoGxFbNsKFXLrKs1wNwhC9+818QptobqT6Sbzqu9CkO6mD5oBaJh4BAvQ7voxEo1lynsAtVi5Y3fQQLMVAs7FFrgF8mOwHdBEWB0jZp6xvNUYhcZ8UQ07d51Y7SlpH0dXZwY3xPLxjy8yAqd8Ieu991bK9fmFZG79TNMIaukUhHfaWv3dtR4iJ8R0cs/zH7/9NZoAEfl+Rtvt+mh6gzRkrH0+tVh6Ky7gxA=
+  on:
+    branch: release
