@@ -1,4 +1,4 @@
-# wait_for_it
+# waitforit
 ## Badges
 ### Travis Build
 [![Build Status](https://travis-ci.com/studioj/wait_for_it.svg?branch=master)](https://travis-ci.com/studioj/wait_for_it)
