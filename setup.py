@@ -4,9 +4,7 @@ from wait_for_it_to import __version__
 
 version = __version__
 
-
-longdesc = """
-This is a library for letting you python code wait for a certain action top complete"""
+longdesc = open('README.md').read(),
 
 setup(
     name="wait_for_it_to",
