@@ -22,7 +22,7 @@ install:
   - pip install -e .
 
 script:
-  - pytest --cov=wait_for_it tests/
+  - pytest --cov=wait_for_it_to tests/
 
 env:
   - CODECOV_TOKEN="919258c7-ed4b-463f-973a-68fc7a081d2d"
