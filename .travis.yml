@@ -22,7 +22,7 @@ install:
   - pip install -e .
 
 script:
-  - pytest --cov=wait_for_it tests/
+  - pytest --cov=wait_for_it_to tests/
 
 env:
   - CODECOV_TOKEN="919258c7-ed4b-463f-973a-68fc7a081d2d"
@@ -33,7 +33,9 @@ after_success:
 deploy:
   provider: pypi
   user: studioj
-  password:
-    secure: GTyYlpNTQ95LqPCtgqlSfDOleMFwQ0ijCHRkUYYmSKpGftzGBDXfwcnxd4pqFDQNS2DcHwF43PnBECrcPVrM/ryjPkdloCnLfv8+oKnjqh3guEsRKfNBcXWqRnL4DjuR/T66w3BCNs3DUFBbmO+71Ak8vSuMKD0U32n3tNYM/UJZgDR3XLayttC9nOAZJOnrUzs60300KB7457tmZ4TJGTtC7fKGZ99U7P2AsBI0hJi236cicJuzcJeqEcwdZg+o7zW2eohhlGSFirczc3L7sw1H/BaYcRRc1SFggRiBwW+/V9CJjKH9YXu2PXhuezXuu2wA8JcJWugDhOyq4GqRi7uIq4cxyH89Y0ndbIKl2e/vtgWrVLB2LmfI9y9GBdjwOh1Fx8BC7I049BxeWsLfUo45qk0qRqVpFyMl2FrcOPUQdVpaSaIpLTr05hRKM9C1thB3YN0V1Kqna/0v2HViO+flTBOtXIlvVw9GClOPmTvdgGGQwGJ6aGO9MbXQ6fQzIhgtFq3qKoSo/FvGanlqfIs5L9TkRow8y8vHY3P+PexO8kirQzTfo6PlqpB1c6wMuK4kMMp1gyKYUlYSHny84PEhb9LO+BdWGf2s3D53ioynZmMSc4UCtYmc11ktPnMq7zcC78OUE/+Fe7YUUpncXv65ilfxDm4CbCIyofGb1Gw=
+  distributions: "sdist bdist bdist_wheel"
+  password: Q5NfTQm2PtSLXii
   on:
     branch: release
+  repo: studioj/wait_for_it
+
