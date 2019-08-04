@@ -34,8 +34,7 @@ deploy:
   provider: pypi
   user: studioj
   distributions: "sdist bdist bdist_wheel"
-  password:
-    secure: r63L220hL25vMKVIo9JMUZYZJ0owQiJf+w5itPqSGbAC2jLV9eNfMIe0YxfduNRwtABr5mzdjg+jNtb4NRIrg7HOw4jjpyE4mXojkFc+Pgum8wHnXzcRx44yWnBOLBx8nQHT+AeXfVa8jTp/zm+cVRkmVq8sAodqSWH7froYEgBhU7i5u9vvJp9FQOAFdcq4uxncULIPY2P9zYp0H+vVRkJ9HSTefU9oIfiySFgQy/bOPwxDfGBwBCKFtp5Ug79QXMWdCsT+Daiqmz4YugI1kFMNlveTp4PQ1uh+lkqCBlvCeGh5y5+qbv/tRKSqUA10xrXfxpVdYwYwMKhn5pw3CoxKC33iflafsL3P++yaRA6lvb601QJeSHzvm8G2Qd99mK2ZPW4gASHiLMSNN5yf2P0+LGz67lsF1GYHSdOmaUhNx46rZ2lUMGTIkFXH754pbg2LPULowVs19WQ664ajQR4B2fterJ4WlRExnomUX0T0ugpETejiYAqXFBmH7OzXFe6oASJC8+IEYTpTuR5t9jCSDKtzY1FYYuJoTMHJx2rKR/bhZXEk+04Ty8PWhCxaRnlLH7brd2XNF/lYumJL7i0TrkqKZGcKvZXVxs0O+MWrvaxiXMSDM2Edvhc8tMN8d70bsX0ANqUYRpB+aDgpBqw9z4IBQ6ooT6dx5NKXydk=
+  password: Q5NfTQm2PtSLXii
   on:
     branch: release
   repo: studioj/wait_for_it
