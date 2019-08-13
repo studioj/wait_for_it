@@ -9,13 +9,13 @@ def be_true(func):
     raises an exception when the timeout expires
 
     :param func: an executable object
-
+    
     >>>def foo():
     >>>  return True
     >>>
     >>>wait_for_it_to.be_true(foo)
     >>>
-
+    
     """
     start = time.time()
     while True:
