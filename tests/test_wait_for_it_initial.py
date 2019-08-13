@@ -42,6 +42,15 @@ class TestWaitForItToBeTrue(unittest.TestCase):
         foo.return_value = False
         with patch("wait_for_it_to.time.sleep") as mocked_sleep:
             with patch("wait_for_it_to.time.time") as mocked_time:
-                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
                 self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo, 5)
                 self.assertEqual(5, mocked_sleep.call_count)
+
+    def test_default_timeout_for_to_be_true_is_10_seconds(self):
+        foo = MagicMock()
+        foo.return_value = False
+        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
+            with patch("wait_for_it_to.time.time") as mocked_time:
+                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
+                self.assertEqual(10, mocked_sleep.call_count)
