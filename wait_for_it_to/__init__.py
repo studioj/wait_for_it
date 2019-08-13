@@ -27,3 +27,11 @@ def be_true(func, timeout=10):
             msg = "expected something that evaluates to True, but got %s instead" % str(result)
             raise TimeoutError(msg)
         time.sleep(0.01)
+
+
+def be_false(func):
+    result = func()
+    if not result:
+        return True
+    time.sleep(0.01)
+    return
