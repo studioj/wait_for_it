@@ -9,6 +9,8 @@ version = __version__
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
+with open('test_requirements.txt') as f:
+    test_requirements = f.read().splitlines()
 
 setup(
     name="wait_for_it_to",
@@ -20,6 +22,7 @@ setup(
     author_email="neefsj@gmail.com",
     url="https://github.com/studioj/wait_for_it/",
     packages=["wait_for_it_to"],
+    tests_require=test_requirements,
     license="GPL",
     platforms="Posix; MacOS X; Windows",
     classifiers=[
