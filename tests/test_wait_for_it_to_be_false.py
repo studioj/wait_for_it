@@ -19,3 +19,16 @@ class TestWaitForItToBeFalse(unittest.TestCase):
         with patch("wait_for_it_to.time.sleep") as mocked_sleep:
             wait_for_it_to.be_false(foo)
             mocked_sleep.assert_called_with(0.01)
+
+    def test_to_be_false_calls_the_passed_function_obejct(self):
+        foo = MagicMock(return_value=False)
+        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
+            wait_for_it_to.be_false(foo)
+            foo.assert_called_once()
+
+    def test_to_be_true_raises_timeout_error_when_timeout_has_passed(self):
+        foo = MagicMock(return_value=True)
+        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
+            with patch("wait_for_it_to.time.time") as mocked_time:
+                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                self.assertRaises(TimeoutError, wait_for_it_to.be_false, foo)
