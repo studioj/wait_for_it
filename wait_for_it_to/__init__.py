@@ -16,7 +16,7 @@ def be_true(func, timeout=10):
     >>>
     >>>wait_for_it_to.be_true(foo)
     >>>
-
+    
     """
     start = time.time()
     while True:
