@@ -1,18 +1,21 @@
+from os import path
+
 from setuptools import setup
 
 from wait_for_it_to import __version__
 
 version = __version__
 
-
-longdesc = """
-This is a library for letting you python code wait for a certain action top complete"""
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name="wait_for_it_to",
     version=version,
     description="helper library which waits",
-    long_description=longdesc,
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author="Jef Neefs",
     author_email="neefsj@gmail.com",
     url="https://github.com/studioj/wait_for_it/",
