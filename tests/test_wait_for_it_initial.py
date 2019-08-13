@@ -6,7 +6,6 @@ import wait_for_it_to
 
 
 class TestWaitForItToBeTrue(unittest.TestCase):
-
     def test_wait_for_it_to_has_a_version(self):
         assert wait_for_it_to.__version__
 
