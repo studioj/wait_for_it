@@ -35,6 +35,7 @@ Traceback (most recent call last):
     raise TimeoutError(msg)
 TimeoutError: expected something that evaluates to True, but got False instead
 
+>> wait_for_it_to.be_true(foo, timeout=5)
 ```
 #### Version History
 0.0.7: first release
