@@ -30,6 +30,19 @@ def be_true(func, timeout=10):
 
 
 def be_false(func, timeout=10):
+    """
+    waits until func evaluates to False
+    raises an exception when the timeout expires
+
+    :param timeout: a timeout in seconds
+    :param func: an executable object
+
+    >>>def foo():
+    >>>  return False
+    >>>
+    >>>wait_for_it_to.be_false(foo)
+    >>>wait_for_it_to.be_false(foo, timeout=5)
+    """
     start = time.time()
     while True:
         result = func()
@@ -39,4 +52,3 @@ def be_false(func, timeout=10):
             msg = "expected something that evaluates to True, but got %s instead" % str(result)
             raise TimeoutError(msg)
         time.sleep(0.01)
-    return

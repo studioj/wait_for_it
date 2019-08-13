@@ -39,4 +39,7 @@ TimeoutError: expected something that evaluates to True, but got False instead
 ```
 #### Version History
 0.0.7: first release
+
 0.0.8: adding timeout functionality
+
+0.0.9: adding be false
