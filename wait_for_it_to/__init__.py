@@ -16,12 +16,12 @@ def be_true(func, timeout=10):
     >>>
     >>>wait_for_it_to.be_true(foo)
     >>>wait_for_it_to.be_true(foo, timeout=5)
-    
+
     """
     start = time.time()
     while True:
         result = func()
-        if result:
+        if result is True:
             return True
         if time.time() > start + timeout:
             msg = "expected something that evaluates to True, but got %s instead" % str(result)
