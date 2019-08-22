@@ -21,7 +21,7 @@ def be_true(func, timeout=10):
     start = time.time()
     while True:
         result = func()
-        if result is True:
+        if result == True:
             return True
         if time.time() > start + timeout:
             msg = "expected something that evaluates to True, but got %s instead" % str(result)
@@ -46,7 +46,7 @@ def be_false(func, timeout=10):
     start = time.time()
     while True:
         result = func()
-        if not result:
+        if result == False:
             return False
         if time.time() > start + timeout:
             msg = "expected something that evaluates to True, but got %s instead" % str(result)
