@@ -54,11 +54,10 @@ def be_equal(func, expected_value, timeout=10):
     >>>wait_for_it_to.be_equal(foo, "any object", timeout=5)
     """
     start = time.time()
-    while True:
-        result = func()
-        if result == expected_value:
-            return False
+    result = func()
+    while result != expected_value:
         if time.time() > start + timeout:
             msg = "expected something that evaluates to True, but got %s instead" % str(result)
             raise TimeoutError(msg)
         time.sleep(0.01)
+        result = func()
