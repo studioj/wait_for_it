@@ -23,8 +23,9 @@ class TestWaitForItToBeTrue(unittest.TestCase):
             wait_for_it_to.be_true(foo)
             mocked_sleep.assert_called_with(0.01)
 
-    def test_to_be_true_calls_the_passed_function_obejct(self):
+    def test_to_be_true_calls_the_passed_function_object(self):
         foo = MagicMock()
+        foo.return_value = True
         with patch("wait_for_it_to.time.sleep") as mocked_sleep:
             wait_for_it_to.be_true(foo)
             foo.assert_called_once()
@@ -54,3 +55,11 @@ class TestWaitForItToBeTrue(unittest.TestCase):
                 mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
                 self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
                 self.assertEqual(10, mocked_sleep.call_count)
+
+    def test_to_be_true_raises_timeout_error_when_func_returns_a_string(self):
+        foo = MagicMock()
+        foo.return_value = "a string which isnt equal to True"
+        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
+            with patch("wait_for_it_to.time.time") as mocked_time:
+                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
