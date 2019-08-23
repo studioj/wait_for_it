@@ -19,10 +19,12 @@ install:
   - pip install pytest-cov
   - pip install mock
   - pip install codecov # For codecov specifically
-  - pip install -e .
+  - pip install .
 
 script:
-  - pytest --cov=wait_for_it_to tests/
+  - cd tests
+  - pytest --cov=wait_for_it_to
+
 
 env:
   - CODECOV_TOKEN="919258c7-ed4b-463f-973a-68fc7a081d2d"
