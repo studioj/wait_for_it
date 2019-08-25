@@ -4,6 +4,11 @@ from mock import patch, MagicMock
 
 import wait_for_it_to
 
+try:
+    a = TimeoutError()
+except NameError:
+    TimeoutError = wait_for_it_to.TimeoutError
+
 
 class TestWaitForItToBeEqual(unittest.TestCase):
     def test_wait_for_it_to_be_equal_immediately_returns_when_func_evals_to_the_same_String(self):

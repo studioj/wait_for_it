@@ -2,6 +2,12 @@ import time
 
 from wait_for_it_to._version import __version__, __version_info__
 
+try:
+    a = TimeoutError()
+except NameError:
+    class TimeoutError(Exception):
+        pass
+
 
 def be_true(func, timeout=10):
     """
