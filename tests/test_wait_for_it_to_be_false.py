@@ -4,6 +4,10 @@ from mock import patch, MagicMock
 
 import wait_for_it_to
 
+try:
+    a = TimeoutError()
+except NameError:
+    TimeoutError = wait_for_it_to.TimeoutError
 
 class TestWaitForItToBeFalse(unittest.TestCase):
     def test_wait_for_it_to_be_false_immediately_returns_when_func_evals_to_false(self):
