@@ -5,12 +5,17 @@ from setuptools import setup
 from wait_for_it_to import __version__
 
 version = __version__
+long_description = ""
+test_requirements = []
 
 this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.md')) as f:
-    long_description = f.read()
-with open('test_requirements.txt') as f:
-    test_requirements = f.read().splitlines()
+try:
+    with open(path.join(this_directory, 'README.md')) as f:
+        long_description = f.read()
+    with open('test_requirements.txt') as f:
+        test_requirements = f.read().splitlines()
+except FileNotFoundError:
+    pass
 
 setup(
     name="wait_for_it_to",
