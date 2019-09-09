@@ -25,6 +25,7 @@ install:
 script:
   - cd tests
   - pytest --cov=wait_for_it_to
+  - cd $TRAVIS_BUILD_DIR
 
 
 env:
