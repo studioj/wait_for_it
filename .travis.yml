@@ -37,9 +37,8 @@ after_success:
 deploy:
   provider: pypi
   user: studioj
-  distributions: sdist
-  password:
-    secure: "VNSuFnS12iol4MxlvF+YYyqhiiMbu9TAPXUssLw5ePY1/AFWmJ4ufJKEl8uxF7MJ3w+Cou3O8+poODty/dsR4eXzByV2rBI6S2be8KHRFmJolVx+cw1PG/A7rGikgNhHkIQw3zY3ty/Yr39laNjvlKV/lp4CHAM/43koUwSYS4nQ2qWJfpQuhc67JzpEGQjmNdVuDb+yeNPvIUrG+n2QN43VcwKtrVPTk1xqBjJ5cVpvzhuYpLzGDv7Ffkk59fBX1lbJKaBbfXKN/4Lg2pDK/OsIFF5T8mYjB3ujgtJd0DloKPnfu0/C5R4NSYCIX+Ull92UxrIHF8J2Fytlauzge1z6T35V9Zh/YwjV/QGdE6NjuuBvdUjsJZL8zkZCSUpGA67HWmvLRRDDLnVgWpHP2sfL2ZRWAn7b20l9RJAiPxHxDLLX7Bkw6NWmSxhWcfyKSw/Uk6xhKYZCC9ky++DyeP8AcKgn6kOEtrK15Ocqz/E3fouWO6f6soFFTYy8zmBLz9x2I8ZTrf9BP/29/8Iud9r4EHweQ3rGwCdVqxsbxSEaTO7y4DgofNZI3bROub7OX/pXeeWF6X1unrdf5KCcDPGTowlDF+scjbxThQqfBBxXZZiR9LfBjVh2aC9qBMMYM2dfRwU/akSwHYQE9zqSZQCr5hIgRkCFKaE4d3gETEM="
+  password: $PYPI_PASS
+  distributions: "sdist bdist_wheel"
   on:
     branch: master
     tags: true
