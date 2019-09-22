@@ -12,8 +12,9 @@ except NameError:
 
 class TestWaitForItToBeEqual(unittest.TestCase):
     def test_wait_for_it_to_be_equal_immediately_returns_when_func_evals_to_the_same_String(self):
-        foo = MagicMock()
-        foo.return_value = "some_value"
+        def foo():
+            return "some_value"
+
         with patch("wait_for_it_to.time.sleep") as mocked_sleep:
             wait_for_it_to.be_equal(foo, "some_value")
             mocked_sleep.assert_not_called()
@@ -28,21 +29,24 @@ class TestWaitForItToBeEqual(unittest.TestCase):
     def test_to_be_equal_calls_the_passed_function_object(self):
         foo = MagicMock()
         foo.return_value = True
+
         with patch("wait_for_it_to.time.sleep") as mocked_sleep:
             wait_for_it_to.be_equal(foo, True)
             foo.assert_called_once()
 
     def test_to_be_equal_raises_timeout_error_when_timeout_has_passed(self):
-        foo = MagicMock()
-        foo.return_value = False
+        def foo():
+            return False
+
         with patch("wait_for_it_to.time.sleep") as mocked_sleep:
             with patch("wait_for_it_to.time.time") as mocked_time:
                 mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
                 self.assertRaises(TimeoutError, wait_for_it_to.be_equal, foo, True)
 
     def test_i_can_set_a_custom_timeout_for_to_be_equal(self):
-        foo = MagicMock()
-        foo.return_value = "False"
+        def foo():
+            return False
+
         with patch("wait_for_it_to.time.sleep") as mocked_sleep:
             with patch("wait_for_it_to.time.time") as mocked_time:
                 mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
@@ -50,10 +54,41 @@ class TestWaitForItToBeEqual(unittest.TestCase):
                 self.assertEqual(5, mocked_sleep.call_count)
 
     def test_default_timeout_for_to_be_equal_is_10_seconds(self):
-        foo = MagicMock()
-        foo.return_value = False
+        def foo():
+            return False
+
         with patch("wait_for_it_to.time.sleep") as mocked_sleep:
             with patch("wait_for_it_to.time.time") as mocked_time:
                 mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
                 self.assertRaises(TimeoutError, wait_for_it_to.be_equal, foo, True)
                 self.assertEqual(10, mocked_sleep.call_count)
+
+    def test_to_be_equal_accepts_one_function_argument(self):
+        def foo(an_argument):
+            assert an_argument == the_argument
+            return True
+
+        the_argument = "the_argument"
+        wait_for_it_to.be_equal(foo, True, params=[the_argument])
+
+    def test_to_be_equal_accepts_two_function_arguments(self):
+        the_argument = "the_argument"
+        the_second_argument = "the_second_argument"
+
+        def foo(an_argument, a_second_argument):
+            assert an_argument == the_argument
+            assert the_second_argument == a_second_argument
+            return True
+
+        wait_for_it_to.be_equal(foo, True, params=[the_argument, the_second_argument])
+
+    def test_to_be_equal_raises_an_exception_if_params_is_not_a_list(self):
+        def foo(an_argument):
+            assert an_argument == the_argument
+            return True
+
+        the_argument = "the_argument"
+        self.assertRaises(TypeError, lambda: wait_for_it_to.be_equal(foo, True, params=the_argument))
+
+        the_argument = 1
+        self.assertRaises(TypeError, lambda: wait_for_it_to.be_equal(foo, True, params=the_argument))

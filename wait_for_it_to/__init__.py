@@ -9,11 +9,12 @@ except NameError:
         pass
 
 
-def be_true(func, timeout=10):
+def be_true(func, timeout=10, params=[]):
     """
     waits until func returns True
     raises an exception when the timeout expires
 
+    :param params: list of parameters to pass to the function
     :param timeout: a timeout in seconds
     :param func: an executable object
 
@@ -24,14 +25,15 @@ def be_true(func, timeout=10):
     >>>wait_for_it_to.be_true(foo, timeout=5)
 
     """
-    be_equal(func, True, timeout)
+    be_equal(func, True, timeout, params)
 
 
-def be_false(func, timeout=10):
+def be_false(func, timeout=10, params=[]):
     """
     waits until func returns False
     raises an exception when the timeout expires
 
+    :param params: list of parameters to pass to the function
     :param timeout: a timeout in seconds
     :param func: an executable object
 
@@ -41,14 +43,15 @@ def be_false(func, timeout=10):
     >>>wait_for_it_to.be_false(foo)
     >>>wait_for_it_to.be_false(foo, timeout=5)
     """
-    be_equal(func, False, timeout)
+    be_equal(func, False, timeout, params=params)
 
 
-def be_equal(func, expected_value, timeout=10):
+def be_equal(func, expected_value, timeout=10, params=[]):
     """
     waits until func is equal to expected_value
     raises an exception when the timeout expires
 
+    :param params: list of parameters to pass to the function
     :param expected_value: any value func should evaluate to
     :param timeout: a timeout in seconds
     :param func: an executable object
@@ -60,7 +63,7 @@ def be_equal(func, expected_value, timeout=10):
     >>>wait_for_it_to.be_equal(foo, "any object", timeout=5)
     """
     start = time.time()
-    result = func()
+    result = func(*params)
     while result != expected_value:
         if time.time() > start + timeout:
             msg = "expected something that evaluates to True, but got %s instead" % str(result)
