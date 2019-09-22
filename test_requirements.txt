@@ -1,5 +1,5 @@
 black==19.3b0
 docutils==0.15.2
-pytest==5.1.2
+pytest==5.1.3
 twine==1.15.0
 mock==3.0.5
