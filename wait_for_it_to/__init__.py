@@ -47,6 +47,7 @@ def be_true(func, timeout=10, args=None, kwargs=None):
     waits until func returns True
     raises an exception when the timeout expires
 
+    :param params: list of parameters to pass to the function
     :param timeout: a timeout in seconds
     :param func: an executable object
 
