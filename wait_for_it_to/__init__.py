@@ -82,6 +82,7 @@ def be_equal(func, expected_value, timeout=10, args=None, kwargs=None):
     waits until func is equal to expected_value
     raises an exception when the timeout expires
 
+    :param func_args: argument list
     :param expected_value: any value func should evaluate to
     :param timeout: a timeout in seconds
     :param func: an executable object
