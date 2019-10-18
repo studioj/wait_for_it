@@ -20,7 +20,7 @@ class Waiter(object):
 
     def cancel(self, time_out):
         """Stop the timer if it hasn't finished yet."""
-        for i in range(time_out * 10):
+        for _ in range(time_out * 10):
             if self.finished.is_set():
                 return
             time.sleep(0.1)
