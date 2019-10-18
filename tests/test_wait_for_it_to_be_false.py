@@ -27,7 +27,7 @@ class TestWaitForItToBeFalse(unittest.TestCase):
         start = time.time()
         wait_for_it_to.be_false(foo)
 
-        self.assertLessEqual(time.time() - start, 0.003)
+        self.assertLessEqual(time.time() - start, 0.005)
 
     def test_to_be_false_calls_the_passed_function_obejct(self):
         foo = MagicMock(return_value=False)
