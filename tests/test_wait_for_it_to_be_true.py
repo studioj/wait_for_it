@@ -22,7 +22,7 @@ class TestWaitForItToBeTrue(unittest.TestCase):
         start = time.time()
         wait_for_it_to.be_true(foo)
 
-        self.assertLessEqual(time.time() - start, 0.001)
+        self.assertLessEqual(time.time() - start, 0.002)
 
     def test_to_be_true_sleeps_once_when_the_func_returns_only_after_the_second_try(self):
         foo = MagicMock()
