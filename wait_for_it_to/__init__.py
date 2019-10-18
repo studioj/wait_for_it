@@ -20,11 +20,15 @@ class Waiter(object):
 
     def cancel(self, time_out):
         """Stop the timer if it hasn't finished yet."""
-        time.sleep(time_out)
+        for i in range(time_out * 10):
+            if self.finished.is_set():
+                return
+            time.sleep(0.1)
         self.finished.set()
 
     def wait_for_it_to_be_equal(self, timeout, function, expected_value, args=None, kwargs=None):
-        self.finished = Event()
+
+        self.finished.clear()
         self.timeout_timer = Thread(target=self.cancel, args=(timeout,))
         self.args = args if args is not None else []
         self.kwargs = kwargs if kwargs is not None else {}
@@ -34,7 +38,7 @@ class Waiter(object):
             if result == expected_value:
                 self.finished.set()
                 return result
-            time.sleep(0.01)
+            time.sleep(0.001)
         raise TimeoutError()
 
 

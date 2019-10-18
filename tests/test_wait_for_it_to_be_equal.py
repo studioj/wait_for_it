@@ -39,7 +39,7 @@ class TestWaitForItToBeEqual(unittest.TestCase):
                 mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
                 self.assertRaises(TimeoutError, wait_for_it_to.be_equal, foo, True)
 
-    def test_i_can_set_a_custom_timeout_for_to_be_equal(self):
+    def test_i_can_set_a_custom_timeout_for_to_be_equal_which_drifts_only_10_percent(self):
         def foo():
             return False
 
@@ -47,13 +47,13 @@ class TestWaitForItToBeEqual(unittest.TestCase):
         self.assertRaises(TimeoutError, wait_for_it_to.be_equal, foo, "True", 5)
         self.assertLessEqual(time.time() - start, 5.05)
 
-    def test_default_timeout_for_to_be_equal_is_10_seconds(self):
+    def test_default_timeout_for_to_be_equal_is_lower_than_10_1_seconds(self):
         def foo():
             return False
 
         start = time.time()
         self.assertRaises(TimeoutError, wait_for_it_to.be_equal, foo, True)
-        self.assertLessEqual(time.time() - start, 10.5)
+        self.assertLessEqual(time.time() - start, 10.1)
 
     def test_to_be_equal_accepts_one_function_argument(self):
         def foo(an_argument):
