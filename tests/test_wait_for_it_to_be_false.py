@@ -29,12 +29,6 @@ class TestWaitForItToBeFalse(unittest.TestCase):
 
         self.assertLessEqual(time.time() - start, 0.005)
 
-    def test_to_be_false_calls_the_passed_function_obejct(self):
-        foo = MagicMock(return_value=False)
-
-        wait_for_it_to.be_false(foo)
-
-        foo.assert_called_once()
 
     def test_to_be_false_raises_timeout_error_when_timeout_has_passed(self):
         foo = MagicMock(return_value=True)
@@ -64,24 +58,34 @@ class TestWaitForItToBeFalse(unittest.TestCase):
         self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo, 5)
         self.assertLessEqual(time.time() - start, 5.1)
 
-    def test_to_be_false_accepts_one_function_argument(self):
-        def foo(an_argument):
-            if not an_argument == the_argument:
-                raise AssertionError()
-            return False
 
-        the_argument = "the_argument"
-        wait_for_it_to.be_false(foo, args=[the_argument])
+def test_to_be_false_accepts_one_function_argument(self):
+    def foo(an_argument):
+        if not an_argument == the_argument:
+            raise AssertionError()
+        return False
 
-    def test_to_be_false_accepts_two_function_arguments(self):
-        the_argument = "the_argument"
-        the_second_argument = "the_second_argument"
+    the_argument = "the_argument"
+    wait_for_it_to.be_false(foo, args=[the_argument])
 
-        def foo(an_argument, a_second_argument):
-            if not an_argument == the_argument:
-                raise AssertionError()
-            if not the_second_argument == a_second_argument:
-                raise AssertionError()
-            return False
 
-        wait_for_it_to.be_false(foo, args=[the_argument, the_second_argument])
+def test_to_be_false_accepts_two_function_arguments(self):
+    the_argument = "the_argument"
+    the_second_argument = "the_second_argument"
+
+    def foo(an_argument, a_second_argument):
+        if not an_argument == the_argument:
+            raise AssertionError()
+        if not the_second_argument == a_second_argument:
+            raise AssertionError()
+        return False
+
+    wait_for_it_to.be_false(foo, args=[the_argument, the_second_argument])
+
+
+def test_to_be_false_calls_the_passed_function_obejct(self):
+    foo = MagicMock(return_value=False)
+
+    wait_for_it_to.be_false(foo)
+
+    foo.assert_called_once()
