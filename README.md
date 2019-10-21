@@ -60,4 +60,4 @@ Quite similar you have the functionality
 ```
 ### Version History
 
-https://github.com/studioj/wait_for_it/releases
+<https://github.com/studioj/wait_for_it/releases>
