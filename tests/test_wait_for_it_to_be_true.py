@@ -72,7 +72,8 @@ class TestWaitForItToBeTrue(unittest.TestCase):
 
     def test_to_be_true_accepts_one_function_argument(self):
         def foo(an_argument):
-            assert an_argument == the_argument
+            if not an_argument == the_argument:
+                raise AssertionError()
             return True
 
         the_argument = "the_argument"
@@ -83,8 +84,10 @@ class TestWaitForItToBeTrue(unittest.TestCase):
         the_second_argument = "the_second_argument"
 
         def foo(an_argument, a_second_argument):
-            assert an_argument == the_argument
-            assert the_second_argument == a_second_argument
+            if not an_argument == the_argument:
+                raise AssertionError()
+            if not the_second_argument == a_second_argument:
+                raise AssertionError()
             return True
 
         wait_for_it_to.be_true(foo, args=[the_argument, the_second_argument])
