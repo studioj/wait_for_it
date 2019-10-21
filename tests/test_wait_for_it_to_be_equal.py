@@ -44,7 +44,7 @@ class TestWaitForItToBeEqual(unittest.TestCase):
 
         start = time.time()
         self.assertRaises(TimeoutError, wait_for_it_to.be_equal, foo, "True", 5)
-        self.assertLessEqual(time.time() - start, 5.05)
+        self.assertLessEqual(time.time() - start, 5.1)
 
     def test_default_timeout_for_to_be_equal_is_lower_than_10_1_seconds(self):
         def foo():

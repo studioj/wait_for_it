@@ -48,7 +48,7 @@ class TestWaitForItToBeFalse(unittest.TestCase):
         start = time.time()
 
         self.assertRaises(TimeoutError, wait_for_it_to.be_false, foo, 5)
-        self.assertLessEqual(time.time() - start, 5.05)
+        self.assertLessEqual(time.time() - start, 5.1)
 
     def test_default_timeout_for_to_be_false_is_10_seconds(self):
         foo = MagicMock(return_value=True)
@@ -62,7 +62,7 @@ class TestWaitForItToBeFalse(unittest.TestCase):
         start = time.time()
 
         self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo, 5)
-        self.assertLessEqual(time.time() - start, 5.05)
+        self.assertLessEqual(time.time() - start, 5.1)
 
     def test_to_be_false_accepts_one_function_argument(self):
         def foo(an_argument):
