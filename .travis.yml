@@ -20,19 +20,20 @@ install:
   - pip install pytest-cov
   - pip install mock
   - pip install codecov # For codecov specifically
+  - pip install codacy-coverage
   - pip install .
 
-script:
-  - cd tests
-  - pytest --cov=wait_for_it_to
-  - cd $TRAVIS_BUILD_DIR
+  script:
+    - cd tests
+    - pytest --cov=wait_for_it_to --cov-report xml:coverage.xml
+    - cd $TRAVIS_BUILD_DIR
 
+  env:
+    - CODECOV_TOKEN="919258c7-ed4b-463f-973a-68fc7a081d2d"
 
-env:
-  - CODECOV_TOKEN="919258c7-ed4b-463f-973a-68fc7a081d2d"
-
-after_success:
-  - codecov
+  after_success:
+    - codecov
+    - python-codacy-coverage -r coverage.xml
 
 deploy:
   provider: pypi
