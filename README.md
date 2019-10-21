@@ -39,7 +39,6 @@ This would immediatly return
 >>
 ```
 
-
 You can also pass parameters as a list
 ```python
 >> wait_for_it_to.be_true(bar, args=[1])
