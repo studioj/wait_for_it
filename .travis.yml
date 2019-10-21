@@ -32,7 +32,7 @@ env:
 
 after_success:
   - codecov
-  - python-codacy-coverage -r coverage.xml
+  - python-codacy-coverage -r tests/coverage.xml
 
 deploy:
   provider: pypi
