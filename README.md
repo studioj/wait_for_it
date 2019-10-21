@@ -27,12 +27,13 @@ import wait_for_it_to
 def foo():
   return True
 
-def bar():
+def bar(param):
+  x = param
   return False
   
 >> wait_for_it_to.be_true(foo)
 
->> wait_for_it_to.be_true(bar)
+>> wait_for_it_to.be_true(bar, params=[1])
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "..\wait_for_it\wait_for_it_to\__init__.py", line 27, in be_true

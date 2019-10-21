@@ -1,6 +1,7 @@
+import time
 import unittest
 
-from mock import patch, MagicMock
+from mock import MagicMock
 
 import wait_for_it_to
 
@@ -9,6 +10,7 @@ try:
 except NameError:
     TimeoutError = wait_for_it_to.TimeoutError
 
+
 class TestWaitForItToBeTrue(unittest.TestCase):
     def test_wait_for_it_to_has_a_version(self):
         assert wait_for_it_to.__version__
@@ -16,54 +18,73 @@ class TestWaitForItToBeTrue(unittest.TestCase):
     def test_wait_for_it_to_to_be_true_immediately_returns_when_func_evals_to_true(self):
         foo = MagicMock()
         foo.return_value = True
-        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
-            wait_for_it_to.be_true(foo)
-            mocked_sleep.assert_not_called()
+
+        start = time.time()
+        wait_for_it_to.be_true(foo)
+
+        self.assertLessEqual(time.time() - start, 0.002)
 
     def test_to_be_true_sleeps_once_when_the_func_returns_only_after_the_second_try(self):
         foo = MagicMock()
-        foo.side_effect = [False, True]
-        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
-            wait_for_it_to.be_true(foo)
-            mocked_sleep.assert_called_with(0.01)
+        foo.side_effect = [True, False]
+
+        start = time.time()
+        wait_for_it_to.be_true(foo)
+
+        self.assertLessEqual(time.time() - start, 0.002)
 
     def test_to_be_true_calls_the_passed_function_object(self):
         foo = MagicMock()
         foo.return_value = True
-        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
-            wait_for_it_to.be_true(foo)
-            foo.assert_called_once()
+
+        wait_for_it_to.be_true(foo)
+
+        foo.assert_called_once()
 
     def test_to_be_true_raises_timeout_error_when_timeout_has_passed(self):
-        foo = MagicMock()
-        foo.return_value = False
-        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
-            with patch("wait_for_it_to.time.time") as mocked_time:
-                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
+        foo = MagicMock(return_value=False)
+        start = time.time()
+
+        self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
+
+        self.assertLessEqual(time.time() - start, 10.1)
 
     def test_i_can_set_a_custom_timeout_for_to_be_true(self):
-        foo = MagicMock()
-        foo.return_value = False
-        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
-            with patch("wait_for_it_to.time.time") as mocked_time:
-                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo, 5)
-                self.assertEqual(5, mocked_sleep.call_count)
+        foo = MagicMock(return_value=False)
+        start = time.time()
+
+        self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo, 5)
+        self.assertLessEqual(time.time() - start, 5.1)
 
     def test_default_timeout_for_to_be_true_is_10_seconds(self):
-        foo = MagicMock()
-        foo.return_value = False
-        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
-            with patch("wait_for_it_to.time.time") as mocked_time:
-                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
-                self.assertEqual(10, mocked_sleep.call_count)
+        foo = MagicMock(return_value=False)
+        start = time.time()
+
+        self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
+        self.assertLessEqual(time.time() - start, 10.1)
 
     def test_to_be_true_raises_timeout_error_when_func_returns_a_string(self):
-        foo = MagicMock()
-        foo.return_value = "a string which isnt equal to True"
-        with patch("wait_for_it_to.time.sleep") as mocked_sleep:
-            with patch("wait_for_it_to.time.time") as mocked_time:
-                mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
+        foo = MagicMock(return_value="a string which isnt equal to True")
+        start = time.time()
+
+        self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo, 5)
+        self.assertLessEqual(time.time() - start, 5.1)
+
+    def test_to_be_true_accepts_one_function_argument(self):
+        def foo(an_argument):
+            assert an_argument == the_argument
+            return True
+
+        the_argument = "the_argument"
+        wait_for_it_to.be_true(foo, args=[the_argument])
+
+    def test_to_be_true_accepts_two_function_arguments(self):
+        the_argument = "the_argument"
+        the_second_argument = "the_second_argument"
+
+        def foo(an_argument, a_second_argument):
+            assert an_argument == the_argument
+            assert the_second_argument == a_second_argument
+            return True
+
+        wait_for_it_to.be_true(foo, args=[the_argument, the_second_argument])
