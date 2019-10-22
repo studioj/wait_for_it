@@ -55,7 +55,7 @@ class TestWaitForItToBeEqual(unittest.TestCase):
         self.assertRaises(TypeError, lambda: wait_for_it_to.be_equal(foo, True, args=the_argument))
 
 
-def test_to_be_equal_accepts_one_function_argument(self):
+def test_to_be_equal_accepts_one_function_argument():
     def foo(an_argument):
         if not an_argument == the_argument:
             raise AssertionError()
@@ -65,7 +65,7 @@ def test_to_be_equal_accepts_one_function_argument(self):
     wait_for_it_to.be_equal(foo, True, 2, [the_argument])
 
 
-def test_to_be_equal_accepts_two_function_arguments(self):
+def test_to_be_equal_accepts_two_function_arguments():
     the_argument = "the_argument"
     the_second_argument = "the_second_argument"
 
@@ -79,13 +79,13 @@ def test_to_be_equal_accepts_two_function_arguments(self):
     wait_for_it_to.be_equal(foo, True, args=[the_argument, the_second_argument])
 
 
-def test_wait_for_it_to_be_equal_immediately_returns_when_func_evals_to_the_same_String(self):
+def test_wait_for_it_to_be_equal_immediately_returns_when_func_evals_to_the_same_String():
     foo = MagicMock(return_value="some_value")
     wait_for_it_to.be_equal(foo, "some_value")
     foo.assert_called_once()
 
 
-def test_to_be_equal_calls_the_passed_function_object(self):
+def test_to_be_equal_calls_the_passed_function_object():
     foo = MagicMock()
     foo.return_value = True
 
