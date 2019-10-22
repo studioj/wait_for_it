@@ -63,7 +63,7 @@ class TestWaitForItToBeTrue(unittest.TestCase):
         self.assertLessEqual(time.time() - start, 5.1)
 
 
-def test_to_be_true_accepts_one_function_argument(self):
+def test_to_be_true_accepts_one_function_argument():
     def foo(an_argument):
         if not an_argument == the_argument:
             raise AssertionError()
@@ -73,7 +73,7 @@ def test_to_be_true_accepts_one_function_argument(self):
     wait_for_it_to.be_true(foo, args=[the_argument])
 
 
-def test_to_be_true_accepts_two_function_arguments(self):
+def test_to_be_true_accepts_two_function_arguments():
     the_argument = "the_argument"
     the_second_argument = "the_second_argument"
 
@@ -87,7 +87,7 @@ def test_to_be_true_accepts_two_function_arguments(self):
     wait_for_it_to.be_true(foo, args=[the_argument, the_second_argument])
 
 
-def test_to_be_true_calls_the_passed_function_object(self):
+def test_to_be_true_calls_the_passed_function_object():
     foo = MagicMock()
     foo.return_value = True
 
