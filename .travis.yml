@@ -27,12 +27,9 @@ script:
   - pytest --cov=wait_for_it_to --cov-report xml:coverage.xml
   - cd $TRAVIS_BUILD_DIR
 
-env:
-  - CODECOV_TOKEN="919258c7-ed4b-463f-973a-68fc7a081d2d"
-
 after_success:
   - codecov
-  - python-codacy-coverage -r coverage.xml
+  - python-codacy-coverage -r tests/coverage.xml
 
 deploy:
   provider: pypi
