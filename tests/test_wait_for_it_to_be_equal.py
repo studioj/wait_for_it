@@ -79,7 +79,7 @@ def test_to_be_equal_accepts_two_function_arguments():
     wait_for_it_to.be_equal(foo, True, args=[the_argument, the_second_argument])
 
 
-def test_wait_for_it_to_be_equal_immediately_returns_when_func_evals_to_the_same_String():
+def test_wait_for_it_to_be_equal_immediately_returns_when_func_evals_to_the_same_string():
     foo = MagicMock(return_value="some_value")
     wait_for_it_to.be_equal(foo, "some_value")
     foo.assert_called_once()
