@@ -95,3 +95,7 @@ def be_equal(func, expected_value, timeout=10, args=None, kwargs=None):
     """
     waiter = Waiter()
     waiter.wait_for_it_to_be_equal(timeout, func, expected_value, args, kwargs)
+
+
+def not_to_raise_an_exception(func):
+    return None
