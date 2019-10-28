@@ -24,3 +24,15 @@ class TestWaitForItToNotRaiseAnException(unittest.TestCase):
             raise Exception("this keeps on failing")
 
         self.assertRaises(TimeoutError, wait_for_it_to.not_raise_an_exception, func, 1)
+
+    def test_raises_a_timeout_error_when_func_keeps_raising_exceptions_which_are_equal_to_the_sentinel_exception(self):
+        def func():
+            raise RuntimeError("this keeps on failing")
+
+        self.assertRaises(TimeoutError, wait_for_it_to.not_raise_an_exception, func, 1, RuntimeError)
+
+    def test_raises_an_exception_which_is_not_equal_to_the_sentinel_exception(self):
+        def func():
+            raise RuntimeError("this keeps on failing")
+
+        self.assertRaises(RuntimeError, wait_for_it_to.not_raise_an_exception, func, 1, EnvironmentError)
