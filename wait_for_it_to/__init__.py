@@ -41,6 +41,18 @@ class Waiter(object):
             time.sleep(0.001)
         raise TimeoutError()
 
+    def wait_for_it_to_not_raise_an_exception(self, function, timeout):
+        self.finished.clear()
+        self.timeout_timer = Thread(target=self.cancel, args=(timeout,))
+        self.timeout_timer.start()
+        while not self.finished.is_set():
+            try:
+                return function(*self.args, **self.kwargs)
+            except Exception:
+                pass
+            time.sleep(0.001)
+        raise TimeoutError()
+
 
 def be_true(func, timeout=10, args=None, kwargs=None):
     """
@@ -97,5 +109,6 @@ def be_equal(func, expected_value, timeout=10, args=None, kwargs=None):
     waiter.wait_for_it_to_be_equal(timeout, func, expected_value, args, kwargs)
 
 
-def not_to_raise_an_exception(func):
-    return None
+def not_raise_an_exception(func, timeout=10):
+    waiter = Waiter()
+    waiter.wait_for_it_to_not_raise_an_exception(func, timeout)
