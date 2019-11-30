@@ -46,6 +46,7 @@ Quite similar you have the functionality
 ```python
 >> wait_for_it_to.be_false(bar, timeout=5, args[1])
 >> wait_for_it_to.equal(bar, False, timeout=5, args[1])
+>> wait_for_it_to.not_raise_an_exception(bar, timeout=5, RuntimeError)
 ```
 ### Version History
 
