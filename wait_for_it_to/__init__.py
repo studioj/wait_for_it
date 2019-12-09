@@ -113,4 +113,4 @@ def be_equal(func, expected_value, timeout=10, args=None, kwargs=None):
 
 def not_raise_an_exception(func, timeout=10, sentinel_exception=Exception, args=None, kwargs=None):
     waiter = Waiter()
-    waiter.wait_for_it_to_not_raise_an_exception(func, timeout, sentinel_exception, args, kwargs)
+    return waiter.wait_for_it_to_not_raise_an_exception(func, timeout, sentinel_exception, args, kwargs)
