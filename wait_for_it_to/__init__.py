@@ -41,9 +41,11 @@ class Waiter(object):
             time.sleep(0.001)
         raise TimeoutError()
 
-    def wait_for_it_to_not_raise_an_exception(self, function, timeout, sentinel_exception):
+    def wait_for_it_to_not_raise_an_exception(self, function, timeout, sentinel_exception, args=None, kwargs=None):
         self.finished.clear()
         self.timeout_timer = Thread(target=self.cancel, args=(timeout,))
+        self.args = args if args is not None else []
+        self.kwargs = kwargs if kwargs is not None else {}
         self.timeout_timer.start()
         while not self.finished.is_set():
             try:
@@ -109,6 +111,6 @@ def be_equal(func, expected_value, timeout=10, args=None, kwargs=None):
     waiter.wait_for_it_to_be_equal(timeout, func, expected_value, args, kwargs)
 
 
-def not_raise_an_exception(func, timeout=10, sentinel_exception=Exception):
+def not_raise_an_exception(func, timeout=10, sentinel_exception=Exception, args=None, kwargs=None):
     waiter = Waiter()
-    waiter.wait_for_it_to_not_raise_an_exception(func, timeout, sentinel_exception)
+    waiter.wait_for_it_to_not_raise_an_exception(func, timeout, sentinel_exception, args, kwargs)

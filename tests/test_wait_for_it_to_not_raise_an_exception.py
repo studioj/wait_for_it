@@ -36,3 +36,9 @@ class TestWaitForItToNotRaiseAnException(unittest.TestCase):
             raise RuntimeError("this keeps on failing")
 
         self.assertRaises(RuntimeError, wait_for_it_to.not_raise_an_exception, func, 1, EnvironmentError)
+
+    def test_takes_args_and_kwargs(self):
+        def func(num):
+            return "jojo"
+
+        wait_for_it_to.not_raise_an_exception(func, 1, Exception, args=[5])
