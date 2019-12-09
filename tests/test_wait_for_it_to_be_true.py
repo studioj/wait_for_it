@@ -35,11 +35,8 @@ class TestWaitForItToBeTrue(unittest.TestCase):
 
     def test_to_be_true_raises_timeout_error_when_timeout_has_passed(self):
         foo = MagicMock(return_value=False)
-        start = time.time()
 
         self.assertRaises(TimeoutError, wait_for_it_to.be_true, foo)
-
-        self.assertLessEqual(time.time() - start, 10.1)
 
     def test_i_can_set_a_custom_timeout_for_to_be_true(self):
         foo = MagicMock(return_value=False)
