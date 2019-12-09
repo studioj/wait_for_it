@@ -1,6 +1,8 @@
 import time
 import unittest
 
+from mock import MagicMock
+
 import wait_for_it_to
 
 try:
@@ -11,8 +13,7 @@ except NameError:
 
 class TestWaitForItToNotRaiseAnException(unittest.TestCase):
     def test_wait_for_it_not_to_raise_an_exception_returns_immediatly_when_no_exception_raised(self):
-        def func():
-            pass
+        func = MagicMock()
 
         start = time.time()
         wait_for_it_to.not_raise_an_exception(func)
