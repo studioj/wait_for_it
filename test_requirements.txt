@@ -1,4 +1,4 @@
-black==19.10b0
+black==20.8b1
 docutils==0.16
 pytest==5.4.3
 twine==3.2.0
