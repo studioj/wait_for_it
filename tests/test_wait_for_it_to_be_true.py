@@ -1,7 +1,7 @@
 import time
 import unittest
 
-from mock import MagicMock
+from unittest.mock import MagicMock
 
 import wait_for_it_to
 
@@ -66,7 +66,7 @@ class TestWaitForItToBeTrue(unittest.TestCase):
 
 def test_to_be_true_accepts_one_function_argument():
     def foo(an_argument):
-        if not an_argument == the_argument:
+        if an_argument != the_argument:
             raise AssertionError()
         return True
 
@@ -79,9 +79,9 @@ def test_to_be_true_accepts_two_function_arguments():
     the_second_argument = "the_second_argument"
 
     def foo(an_argument, a_second_argument):
-        if not an_argument == the_argument:
+        if an_argument != the_argument:
             raise AssertionError()
-        if not the_second_argument == a_second_argument:
+        if the_second_argument != a_second_argument:
             raise AssertionError()
         return True
 

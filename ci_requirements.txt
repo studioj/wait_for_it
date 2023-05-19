@@ -2,7 +2,9 @@ black==23.3.0
 docutils==0.16
 pytest==7.3.1
 twine==3.3.0
-mock==4.0.2
 coverage==7.2.5
 codecov==2.1.13
 pytest-cov
+build
+flake8
+twine

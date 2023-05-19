@@ -1,7 +1,7 @@
 import time
 import unittest
 
-from mock import patch, MagicMock
+from unittest.mock import patch, MagicMock
 
 import wait_for_it_to
 
@@ -48,7 +48,7 @@ class TestWaitForItToBeEqual(unittest.TestCase):
 
     def test_to_be_equal_raises_an_exception_if_params_is_not_a_list(self):
         def foo(an_argument):
-            if not an_argument == the_argument:
+            if an_argument != the_argument:
                 raise AssertionError()
             return True
 
@@ -61,7 +61,7 @@ class TestWaitForItToBeEqual(unittest.TestCase):
 
 def test_to_be_equal_accepts_one_function_argument():
     def foo(an_argument):
-        if not an_argument == the_argument:
+        if an_argument != the_argument:
             raise AssertionError()
         return True
 
@@ -74,9 +74,9 @@ def test_to_be_equal_accepts_two_function_arguments():
     the_second_argument = "the_second_argument"
 
     def foo(an_argument, a_second_argument):
-        if not an_argument == the_argument:
+        if an_argument != the_argument:
             raise AssertionError()
-        if not the_second_argument == a_second_argument:
+        if the_second_argument != a_second_argument:
             raise AssertionError()
         return True
 
