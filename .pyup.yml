@@ -1,2 +1,2 @@
 requirements:
-  - test_requirements.txt
+  - ci_requirements.txt
