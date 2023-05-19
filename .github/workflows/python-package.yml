@@ -54,6 +54,11 @@ jobs:
     - name: Test with pytest
       run: |
         pytest --cov=wait_for_it_to --cov-report xml:coverage.xml
+    - name: Upload coverage reports to Codecov
+      run: |
+        curl -Os https://uploader.codecov.io/latest/linux/codecov
+        chmod +x codecov
+        ./codecov -t ${CODECOV_TOKEN}
     - name: build and validate package
       run: |
         python -m build --sdist --wheel --outdir dist/
