@@ -1,33 +1,9 @@
-from os import path
-from platform import python_version
-
 from setuptools import setup
 
-from wait_for_it_to import __version__
-
-version = __version__
-long_description = ""
-test_requirements = []
-
-this_directory = path.abspath(path.dirname(__file__))
-
-if python_version().startswith("2.7"):
-    try:
-        with open(path.join(this_directory, 'README.md')) as f:
-            long_description = f.read()
-        with open('test_requirements.txt') as f:
-            test_requirements = f.read().splitlines()
-    except IOError:
-        pass
-elif python_version().startswith("3."):
-    try:
-        with open(path.join(this_directory, 'README.md')) as f:
-            long_description = f.read()
-        with open('test_requirements.txt') as f:
-            test_requirements = f.read().splitlines()
-    except FileNotFoundError:
-        pass
-
+if __name__ == "__main__":
+    setup(
+        use_scm_version=True,
+    )
 setup(
     name="wait_for_it_to",
     version=version,
