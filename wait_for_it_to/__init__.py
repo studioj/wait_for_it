@@ -6,12 +6,12 @@ from wait_for_it_to._version import __version__, __version_info__
 try:
     a = TimeoutError()
 except NameError:
+
     class TimeoutError(Exception):
         pass
 
 
 class Waiter(object):
-
     def __init__(self):
         self.timeout_timer = None
         self.args = []
@@ -27,7 +27,6 @@ class Waiter(object):
         self.finished.set()
 
     def wait_for_it_to_be_equal(self, timeout, function, expected_value, args=None, kwargs=None):
-
         self._prepare_for_waiting(args, kwargs, timeout)
         while not self.finished.is_set():
             result = function(*self.args, **self.kwargs)
