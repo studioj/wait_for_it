@@ -15,7 +15,9 @@ class TestWaitForItToBeTrue(unittest.TestCase):
     def test_wait_for_it_to_has_a_version(self):
         self.assertIsNotNone(wait_for_it_to.__version__)
 
-    def test_wait_for_it_to_to_be_true_immediately_returns_when_func_evals_to_true(self):
+    def test_wait_for_it_to_to_be_true_immediately_returns_when_func_evals_to_true(
+        self,
+    ):
         foo = MagicMock()
         foo.return_value = True
 
@@ -24,7 +26,9 @@ class TestWaitForItToBeTrue(unittest.TestCase):
 
         self.assertLessEqual(time.time() - start, 0.002)
 
-    def test_to_be_true_sleeps_once_when_the_func_returns_only_after_the_second_try(self):
+    def test_to_be_true_sleeps_once_when_the_func_returns_only_after_the_second_try(
+        self,
+    ):
         foo = MagicMock()
         foo.side_effect = [True, False]
 

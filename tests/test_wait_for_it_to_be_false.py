@@ -20,7 +20,9 @@ class TestWaitForItToBeFalse(unittest.TestCase):
         wait_for_it_to.be_false(foo)
         self.assertLessEqual(time.time() - start, 0.002)
 
-    def test_to_be_false_sleeps_once_when_the_func_returns_only_after_the_second_try(self):
+    def test_to_be_false_sleeps_once_when_the_func_returns_only_after_the_second_try(
+        self,
+    ):
         foo = MagicMock()
         foo.side_effect = [True, False]
 

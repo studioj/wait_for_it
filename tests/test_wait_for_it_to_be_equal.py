@@ -12,7 +12,9 @@ except NameError:
 
 
 class TestWaitForItToBeEqual(unittest.TestCase):
-    def test_to_be_equal_sleeps_once_when_the_func_returns_only_after_the_second_try(self):
+    def test_to_be_equal_sleeps_once_when_the_func_returns_only_after_the_second_try(
+        self,
+    ):
         foo = MagicMock()
         foo.side_effect = [0, 1]
         wait_for_it_to.be_equal(foo, 1)
@@ -26,7 +28,9 @@ class TestWaitForItToBeEqual(unittest.TestCase):
                 mocked_time.side_effect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
                 self.assertRaises(TimeoutError, wait_for_it_to.be_equal, foo, True)
 
-    def test_i_can_set_a_custom_timeout_for_to_be_equal_which_drifts_only_10_percent(self):
+    def test_i_can_set_a_custom_timeout_for_to_be_equal_which_drifts_only_10_percent(
+        self,
+    ):
         def foo():
             return False
 
