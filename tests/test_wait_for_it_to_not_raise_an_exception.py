@@ -26,7 +26,10 @@ class TestWaitForItToNotRaiseAnException(unittest.TestCase):
 
     def test_raises_a_timeout_error_when_func_keeps_raising_exceptions(self):
         def func():
-            raise Exception(EXCEPTION_STRING)
+            class SomeOtherException(Exception):
+                pass
+
+            raise SomeOtherException(EXCEPTION_STRING)
 
         self.assertRaises(TimeoutError, wait_for_it_to.not_raise_an_exception, func, 1)
 
