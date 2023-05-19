@@ -1,7 +1,7 @@
 import time
 import unittest
 
-from mock import MagicMock
+from unittest.mock import MagicMock
 
 import wait_for_it_to
 
